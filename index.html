@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVENUE ESTATES | Find Your Place</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--green:#20382e;--deep:#14271f;--cream:#f5f2eb;--white:#fffefa;--gold:#b99a69;--muted:#85867d;--line:#e4e0d7}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:#252a25}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.announcement{background:var(--deep);color:#e9e2d4;text-align:center;padding:10px;font-size:9px;letter-spacing:2px;text-transform:uppercase}
+header{height:82px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;background:var(--white);position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line)}
+.logo{font-family:'Playfair Display',serif;font-size:25px;letter-spacing:3px;color:var(--green)}
+.logo span{color:var(--gold)}
+nav{display:flex;align-items:center;gap:32px}
+nav a{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#555c53;transition:.3s}
+nav a:hover{color:var(--gold)}
+.nav-button{background:var(--green);color:white;padding:14px 20px}
+.menu-toggle{display:none;background:none;border:0;font-size:25px}
+.hero{min-height:690px;position:relative;display:flex;align-items:center;padding:80px 9%;background:linear-gradient(90deg,rgba(13,29,22,.88),rgba(13,29,22,.45),rgba(13,29,22,.05)),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90') center/cover;color:white}
+.hero-content{max-width:690px}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;font-weight:600}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(58px,7.5vw,100px);line-height:1.02;font-weight:400;letter-spacing:-2px}
+.hero h1 em{color:#d7bd92;font-weight:400}
+.hero p{font-size:14px;color:#e1e0d9;line-height:1.9;max-width:440px;margin:25px 0 35px}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:20px;padding:17px 24px;background:var(--gold);color:#17251d;border:0;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;transition:.3s}
+.button:hover{background:white;transform:translateY(-3px)}
+.hero-bottom{position:absolute;bottom:35px;left:9%;right:9%;display:flex;justify-content:space-between;color:#e4e3db;font-size:9px;letter-spacing:2px;text-transform:uppercase}
+.search-wrap{position:relative;margin:-1px auto 0;background:var(--white);padding:30px 7%;display:grid;grid-template-columns:repeat(4,1fr) auto;gap:15px;box-shadow:0 10px 30px #18251b0c}
+.search-field label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:9px}
+.search-field select{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:9px 0;color:#303a31;outline:none;font-size:12px}
+.search-wrap button{align-self:end;min-height:43px}
+section{padding:105px 7%}
+.section-heading{text-align:center;margin-bottom:50px}
+.section-heading .eyebrow{margin-bottom:15px}
+.section-heading h2{font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,60px);font-weight:400;color:var(--green)}
+.section-heading p{font-size:12px;color:var(--muted);margin-top:13px}
+.properties{background:var(--cream)}
+.listing-tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:20px}
+.results-count{font-size:11px;color:var(--muted)}
+.sort-select{padding:11px 14px;border:1px solid var(--line);background:var(--white);font-size:11px;color:var(--green)}
+.property-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.property-card{background:var(--white);transition:.4s;overflow:hidden}
+.property-card:hover{transform:translateY(-7px);box-shadow:0 18px 35px #1c2b2015}
+.property-image{height:250px;position:relative;overflow:hidden}
+.property-image img{height:100%;transition:.6s}
+.property-card:hover .property-image img{transform:scale(1.06)}
+.status{position:absolute;top:17px;left:17px;background:var(--green);color:white;padding:9px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px}
+.heart{position:absolute;right:15px;top:13px;width:36px;height:36px;border:0;border-radius:50%;background:#fffefaee;font-size:19px;color:var(--green)}
+.heart.saved{color:#bb554d}
+.property-info{padding:22px}
+.property-type{font-size:9px;letter-spacing:1.7px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.property-info h3{font-family:'Playfair Display',serif;font-size:23px;font-weight:400;color:var(--green)}
+.location{font-size:11px;color:var(--muted);margin-top:8px}
+.price{font-size:18px;font-weight:600;color:var(--green);margin-top:17px}
+.features{display:flex;gap:18px;border-top:1px solid var(--line);margin-top:18px;padding-top:15px;font-size:10px;color:#71766e}
+.card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.details-link{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--green);font-weight:700;border-bottom:1px solid var(--gold);padding-bottom:5px}
+.no-results{grid-column:1/-1;text-align:center;padding:60px 15px;color:var(--muted);background:var(--white)}
+.story{background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:9%;align-items:center}
+.story-image{height:530px;position:relative}
+.story-image img{height:100%;object-fit:cover}
+.story-copy h2{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,65px);font-weight:400;line-height:1.1;color:var(--green);margin-bottom:25px}
+.story-copy h2 em{color:var(--gold)}
+.story-copy p{font-size:13px;color:var(--muted);line-height:2;margin-bottom:17px}
+.stats{display:flex;gap:35px;margin:32px 0}
+.stat strong{display:block;font-family:'Playfair Display',serif;font-size:32px;color:var(--green);font-weight:400}
+.stat span{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.services{background:var(--green);color:white}
+.services .section-heading h2{color:white}
+.services .section-heading p{color:#c2c8bf}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.service-card{border:1px solid #ffffff30;padding:35px 28px;transition:.3s}
+.service-card:hover{background:#ffffff0d;transform:translateY(-5px)}
+.service-icon{font-size:28px;color:var(--gold);margin-bottom:25px}
+.service-card h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;margin-bottom:13px}
+.service-card p{font-size:11px;color:#c3c9c1;line-height:1.9}
+.cta{padding:100px 7%;background:linear-gradient(#15291fba,#15291fba),url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85') center/cover;text-align:center;color:white}
+.cta h2{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,70px);font-weight:400;max-width:750px;margin:0 auto 20px}
+.cta p{font-size:13px;color:#e2e2d9;margin-bottom:30px}
+footer{background:var(--deep);color:white;padding:65px 7% 25px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:35px;padding-bottom:45px}
+.footer-brand .logo{color:white}
+.footer-brand p{font-size:11px;line-height:1.9;color:#aeb8af;max-width:270px;margin-top:17px}
+footer h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:19px}
+.footer-links{display:flex;flex-direction:column;gap:13px}
+.footer-links a,.footer-links p{font-size:11px;color:#b7c0b8}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid #ffffff25;padding-top:22px;display:flex;justify-content:space-between;color:#9ba79d;font-size:10px}
+.modal{position:fixed;inset:0;background:#101c17c9;z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal-box{background:var(--white);width:min(620px,100%);max-height:90vh;overflow:auto;position:relative;padding:35px}
+.modal-close{position:absolute;right:20px;top:15px;border:0;background:none;font-size:26px}
+.modal-box img{height:250px;margin-bottom:22px}
+.modal-box h2{font-family:'Playfair Display',serif;font-size:35px;font-weight:400;color:var(--green)}
+.modal-box p{font-size:12px;line-height:1.9;color:var(--muted);margin:12px 0}
+.modal-price{font-size:20px;color:var(--green);font-weight:700;margin:15px 0}
+.toast{position:fixed;bottom:25px;right:25px;background:var(--green);color:white;padding:16px 22px;font-size:12px;z-index:70;transform:translateY(100px);opacity:0;transition:.4s}
+.toast.show{transform:translateY(0);opacity:1}
+.reveal{opacity:0;transform:translateY(25px);transition:.8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){nav{gap:15px}.property-grid{grid-template-columns:repeat(2,1fr)}.search-wrap{grid-template-columns:repeat(2,1fr)}.search-wrap button{grid-column:1/-1}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){
+ header{height:72px;padding:0 6%}.logo{font-size:21px}.menu-toggle{display:block}
+ nav{display:none;position:absolute;top:72px;left:0;right:0;background:var(--white);padding:25px 7%;flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line)}
+ nav.open{display:flex}nav a{padding:9px 0}.nav-button{text-align:center}
+ .hero{min-height:640px;padding:65px 7%}.hero h1{font-size:62px}.hero-bottom{left:7%;right:7%;font-size:8px}
+ .search-wrap{grid-template-columns:1fr 1fr;padding:24px 7%}
+ section{padding:75px 7%}.property-grid{grid-template-columns:1fr}.property-image{height:260px}
+ .listing-tools{align-items:flex-start;flex-direction:column}.story{grid-template-columns:1fr;gap:35px}.story-image{height:370px}
+ .stats{gap:20px}.stat strong{font-size:27px}.service-grid{grid-template-columns:1fr}
+ .footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}.footer-brand{grid-column:1/-1}
+ .footer-bottom{flex-direction:column;gap:12px}.modal-box{padding:25px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="announcement">A better address. A better way of living. &nbsp; | &nbsp; Nairobi · Kenya</div>
+
+<header>
+<a href="#" class="logo">AVENUE<span>.</span> ESTATES</a>
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+<nav id="nav">
+<a href="#properties">Properties</a>
+<a href="#about">Our story</a>
+<a href="#services">Services</a>
+<a href="#contact">Contact</a>
+<a href="#properties" class="nav-button">Explore homes ↗</a>
+</nav>
+</header>
+
+<main>
+<section class="hero">
+<div class="hero-content reveal">
+<div class="eyebrow">Considered living. Exceptional spaces.</div>
+<h1>Find a place<br>to call <em>yours.</em></h1>
+<p>Discover a more thoughtful approach to property. From beautiful city apartments to private family homes, find the space that feels right.</p>
+<a href="#properties" class="button">Explore our properties ↗</a>
+</div>
+<div class="hero-bottom"><span>Curated properties · Nairobi</span><span>01 / Find your place</span></div>
+</section>
+
+<div class="search-wrap">
+<div class="search-field"><label for="locationFilter">Location</label><select id="locationFilter"><option value="all">All locations</option><option value="kileleshwa">Kileleshwa</option><option value="westlands">Westlands</option><option value="kar en">Karen</option><option value="kilimani">Kilimani</option><option value="runda">Runda</option></select></div>
+<div class="search-field"><label for="typeFilter">Property type</label><select id="typeFilter"><option value="all">All types</option><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="house">House</option><option value="penthouse">Penthouse</option></select></div>
+<div class="search-field"><label for="priceFilter">Maximum price</label><select id="priceFilter"><option value="all">Any budget</option><option value="15000000">Up to KSh 15M</option><option value="30000000">Up to KSh 30M</option><option value="50000000">Up to KSh 50M</option><option value="100000000">Up to KSh 100M</option></select></div>
+<div class="search-field"><label for="bedFilter">Bedrooms</label><select id="bedFilter"><option value="all">Any bedrooms</option><option value="1">1+ bedrooms</option><option value="2">2+ bedrooms</option><option value="3">3+ bedrooms</option><option value="4">4+ bedrooms</option></select></div>
+<button class="button" id="searchButton">Find a home ↗</button>
+</div>
+
+<section class="properties" id="properties">
+<div class="section-heading reveal"><div class="eyebrow">The collection</div><h2>Spaces worth coming home to.</h2><p>A curated selection of properties for the way you want to live.</p></div>
+<div class="listing-tools"><span class="results-count" id="resultsCount">Showing 6 properties</span><select class="sort-select" id="sortSelect" aria-label="Sort properties"><option value="featured">Featured first</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></div>
+<div class="property-grid" id="propertyGrid"></div>
+</section>
+
+<section class="story" id="about">
+<div class="story-image reveal"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85" alt="Modern architectural home"></div>
+<div class="story-copy reveal">
+<div class="eyebrow">More than property</div>
+<h2>We believe a home should feel like <em>you.</em></h2>
+<p>Finding the right property is about more than square footage or a good address. It's about the life you imagine living there.</p>
+<p>At Avenue Estates, we bring thoughtful guidance, local knowledge and a carefully selected collection of homes together to make your next move feel effortless.</p>
+<div class="stats"><div class="stat"><strong>120+</strong><span>Homes explored</span></div><div class="stat"><strong>8+</strong><span>Neighbourhoods</span></div><div class="stat"><strong>100%</strong><span>Personal care</span></div></div>
+<a href="#contact" class="button">Get to know us ↗</a>
+</div>
+</section>
+
+<section class="services" id="services">
+<div class="section-heading reveal"><div class="eyebrow">How we help</div><h2>A little guidance goes a long way.</h2><p>From the first viewing to the final signature, we're here to help.</p></div>
+<div class="service-grid">
+<div class="service-card reveal"><div class="service-icon">⌂</div><h3>Buy a property</h3><p>Explore a curated selection of homes and find the right fit for your lifestyle and plans.</p></div>
+<div class="service-card reveal"><div class="service-icon">◇</div><h3>Sell with confidence</h3><p>Present your property beautifully and connect with buyers who appreciate its value.</p></div>
+<div class="service-card reveal"><div class="service-icon">⌑</div><h3>Find a rental</h3><p>Discover a place that feels like home, with guidance through every step of your search.</p></div>
+</div>
+</section>
+
+<section class="cta" id="contact">
+<div class="eyebrow">Your next chapter starts here</div>
+<h2>Somewhere out there, there's a place with your name on it.</h2>
+<p>Tell us what you're looking for. Let's find it together.</p>
+<a class="button" href="https://wa.me/254700000000?text=Hello%20Avenue%20Estates%2C%20I%27m%20interested%20in%20finding%20a%20property." target="_blank" rel="noopener">Let's talk about property ↗</a>
+</section>
+</main>
+
+<footer>
+<div class="footer-grid">
+<div class="footer-brand"><a href="#" class="logo">AVENUE<span>.</span> ESTATES</a><p>Thoughtful property guidance and carefully selected homes across Nairobi. Find a place that feels like yours.</p></div>
+<div><h4>Discover</h4><div class="footer-links"><a href="#properties">All properties</a><a href="#properties">Apartments</a><a href="#properties">Family homes</a><a href="#properties">Luxury villas</a></div></div>
+<div><h4>Company</h4><div class="footer-links"><a href="#about">Our story</a><a href="#services">Our services</a><a href="#contact">Get in touch</a></div></div>
+<div><h4>Contact</h4><div class="footer-links"><p>Nairobi, Kenya</p><p>+254 700 000 000</p><p>hello@avenueestates.example</p></div></div>
+</div>
+<div class="footer-bottom"><span>© 2026 Avenue Estates. All rights reserved.</span><span>Find your place. Make it yours.</span></div>
+</footer>
+
+<div class="modal" id="propertyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-box"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div id="modalContent"></div></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const properties=[
+{id:1,name:"The Willow Residence",location:"Kileleshwa",area:"kileleshwa",type:"apartment",beds:3,baths:3,areaSize:185,price:24500000,status:"For sale",image:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85",description:"A beautifully finished contemporary apartment with generous living spaces, natural light and a calm, understated palette. Enjoy a private balcony and thoughtfully designed interiors."},
+{id:2,name:"Olive Grove Villa",location:"Karen",area:"karen",type:"villa",beds:4,baths:4,areaSize:420,price:78000000,status:"For sale",image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85",description:"A private villa surrounded by greenery, with expansive windows, elegant entertaining spaces and a garden designed for slow weekends."},
+{id:3,name:"The Westlands Edit",location:"Westlands",area:"westlands",type:"penthouse",beds:2,baths:2,areaSize:145,price:18500000,status:"For sale",image:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85",description:"A sophisticated city penthouse with an open-plan layout, refined finishes and beautiful views across the neighbourhood."},
+{id:4,name:"Garden House",location:"Runda",area:"runda",type:"house",beds:4,baths:5,areaSize:390,price:92000000,status:"For sale",image:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=85",description:"A spacious family home with landscaped gardens, warm interiors and plenty of room for entertaining, relaxing and growing."},
+{id:5,name:"The Kilimani Residence",location:"Kilimani",area:"kilimani",type:"apartment",beds:2,baths:2,areaSize:120,price:14500000,status:"For sale",image:"https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=900&q=85",description:"An inviting modern apartment with a practical layout, bright living spaces and contemporary finishes in a well-connected location."},
+{id:6,name:"Acacia Heights",location:"Kileleshwa",area:"kileleshwa",type:"apartment",beds:1,baths:1,areaSize:78,price:9500000,status:"For sale",image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85",description:"A beautifully planned one-bedroom apartment, ideal for modern city living with an airy interior and carefully selected finishes."}
+];
+
+const grid=document.getElementById('propertyGrid');
+const count=document.getElementById('resultsCount');
+const modal=document.getElementById('propertyModal');
+const toast=document.getElementById('toast');
+let saved=new Set();
+let visibleProperties=[...properties];
+
+function money(value){return 'KSh '+value.toLocaleString('en-KE')}
+function render(list){
+ visibleProperties=list;
+ count.textContent=`Showing ${list.length} ${list.length===1?'property':'properties'}`;
+ if(!list.length){grid.innerHTML='<div class="no-results">No properties match those filters. Try adjusting your search.</div>';return}
+ grid.innerHTML=list.map(p=>`
+ <article class="property-card">
+  <div class="property-image"><img src="${p.image}" alt="${p.name}" loading="lazy"><span class="status">${p.status}</span><button class="heart ${saved.has(p.id)?'saved':''}" data-save="${p.id}" aria-label="Save ${p.name}">${saved.has(p.id)?'♥':'♡'}</button></div>
+  <div class="property-info">
+   <div class="property-type">${p.type} · ${p.location}</div>
+   <h3>${p.name}</h3><div class="location">⌖ ${p.location}, Nairobi</div>
+   <div class="price">${money(p.price)}</div>
+   <div class="features"><span>▣ ${p.beds} beds</span><span>◈ ${p.baths} baths</span><span>↔ ${p.areaSize} m²</span></div>
+   <div class="card-bottom"><a class="details-link" href="#properties" data-details="${p.id}">View property ↗</a><span style="font-size:10px;color:#888">Ref. AE-${String(p.id).padStart(3,'0')}</span></div>
+  </div>
+ </article>`).join('');
+}
+
+function filterProperties(){
+ const location=document.getElementById('locationFilter').value;
+ const type=document.getElementById('typeFilter').value;
+ const price=document.getElementById('priceFilter').value;
+ const beds=document.getElementById('bedFilter').value;
+ let result=properties.filter(p=>
+  (location==='all'||p.area===location)&&
+  (type==='all'||p.type===type)&&
+  (price==='all'||p.price<=Number(price))&&
+  (beds==='all'||p.beds>=Number(beds))
+ );
+ const sort=document.getElementById('sortSelect').value;
+ if(sort==='low')result.sort((a,b)=>a.price-b.price);
+ if(sort==='high')result.sort((a,b)=>b.price-a.price);
+ render(result);
+}
+
+document.getElementById('searchButton').addEventListener('click',()=>{
+ filterProperties();
+ document.getElementById('properties').scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('sortSelect').addEventListener('change',filterProperties);
+
+grid.addEventListener('click',event=>{
+ const saveButton=event.target.closest('[data-save]');
+ if(saveButton){
+  const id=Number(saveButton.dataset.save);
+  saved.has(id)?saved.delete(id):saved.add(id);
+  render(visibleProperties);
+  showToast(saved.has(id)?'Property saved to your favourites.':'Property removed from favourites.');
+  return;
+ }
+ const detailsButton=event.target.closest('[data-details]');
+ if(detailsButton){
+  event.preventDefault();
+  const property=properties.find(p=>p.id===Number(detailsButton.dataset.details));
+  if(!property)return;
+  document.getElementById('modalContent').innerHTML=`
+   <img src="${property.image}" alt="${property.name}">
+   <div class="eyebrow">${property.type} · ${property.location}</div>
+   <h2 id="modalTitle">${property.name}</h2>
+   <div class="modal-price">${money(property.price)}</div>
+   <p>${property.description}</p>
+   <p><strong>${property.beds}</strong> bedrooms &nbsp; · &nbsp; <strong>${property.baths}</strong> bathrooms &nbsp; · &nbsp; <strong>${property.areaSize} m²</strong></p>
+   <a class="button" target="_blank" rel="noopener" href="https://wa.me/254700000000?text=${encodeURIComponent('Hello, I would like to enquire about '+property.name+'.')}">Enquire about this property ↗</a>`;
+  modal.classList.add('open');
+ }
+});
+
+document.getElementById('modalClose').addEventListener('click',()=>modal.classList.remove('open'));
+modal.addEventListener('click',event=>{if(event.target===modal)modal.classList.remove('open')});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')modal.classList.remove('open')});
+
+const menuToggle=document.getElementById('menuToggle');
+const nav=document.getElementById('nav');
+menuToggle.addEventListener('click',()=>{
+ nav.classList.toggle('open');
+ menuToggle.textContent=nav.classList.contains('open')?'✕':'☰';
+});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+ nav.classList.remove('open');menuToggle.textContent='☰';
+}));
+
+let toastTimer;
+function showToast(message){
+ toast.textContent=message;toast.classList.add('show');
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>toast.classList.remove('show'),3000);
+}
+
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
+ });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+render(properties);
+</script>
+</body>
+</html>
